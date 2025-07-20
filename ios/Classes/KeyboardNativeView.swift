@@ -58,8 +58,7 @@ final class EmojiChooserInput: UITextView {
         
         if (text.containsEmoji) {
             KeyboardEmojiPickerPlugin.channel?.invokeMethod("emojiPicked", arguments: ["emoji": text])
-            EmojiChooserInput.isPickingEmoji = false
-            unFocus()
+            focus()
         } else {
             DispatchQueue.main.async {
                 EmojiChooserInput.isPickingEmoji = false
