@@ -39,6 +39,7 @@ class KeyboardNativeView: NSObject, FlutterPlatformView {
         binaryMessenger messenger: FlutterBinaryMessenger?
     ) {
         KeyboardNativeView.inputView.frame = CGRectZero
+        KeyboardNativeView.inputView.keyboardType = .emoji!
         
         super.init()
     }
@@ -70,16 +71,6 @@ final class EmojiChooserInput: UITextView {
         }
     }
     
-    override var textInputMode: UITextInputMode? {
-        for mode in UITextInputMode.activeInputModes {
-            if mode.primaryLanguage == "emoji" {
-                return mode
-            }
-        }
-        
-        return nil
-    }
-    
     override func becomeFirstResponder() -> Bool {
         EmojiChooserInput.isPickingEmoji = true
         
@@ -105,6 +96,9 @@ final class EmojiChooserInput: UITextView {
     }
 }
 
+extension UIKeyboardType {
+    static let emoji = UIKeyboardType(rawValue: 124)
+}
 
 extension Character {
     /// A simple emoji is one scalar and presented to the user as an Emoji
